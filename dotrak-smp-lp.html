@@ -43,6 +43,7 @@ src="https://www.facebook.com/tr?id=2113774992702700&ev=PageView&noscript=1"
     --line:#DFE4EB;
     --text:#1B2735;
     --text-mute:#5D6C7E;
+    --err:#B9432F;
     --radius:14px;
   }
   *{box-sizing:border-box;margin:0;padding:0;-webkit-tap-highlight-color:transparent;}
@@ -115,6 +116,7 @@ src="https://www.facebook.com/tr?id=2113774992702700&ev=PageView&noscript=1"
     transition:background .18s ease;
   }
   .btn:hover,.btn:focus-visible{background:#0C1A2B;}
+  .btn:disabled{opacity:.6;cursor:default;}
   .btn-gold{background:var(--sand);}
   .btn-gold:hover,.btn-gold:focus-visible{background:#A2762F;}
   .btn-light{background:#fff;color:var(--navy-deep);}
@@ -214,20 +216,39 @@ src="https://www.facebook.com/tr?id=2113774992702700&ev=PageView&noscript=1"
   .form-sec .sub{margin-bottom:24px;}
   .field-label{font-size:14.5px;font-weight:700;margin-bottom:10px;display:block;}
   .field-label span{color:var(--sand);}
-  .chips{display:grid;grid-template-columns:1fr 1fr;gap:9px;margin-bottom:26px;}
+  .chips{display:grid;grid-template-columns:1fr 1fr;gap:9px;margin-bottom:24px;}
   .chip{
     font-family:inherit;font-size:14.5px;font-weight:600;letter-spacing:-0.02em;
     padding:15px 8px;border:1px solid var(--line);background:#fff;color:var(--text-mute);
     border-radius:11px;cursor:pointer;transition:all .16s ease;
   }
-  .chip[aria-pressed="true"]{
-    background:var(--navy);border-color:var(--navy);color:#fff;
-  }
-  .form-box{background:var(--mist);border-radius:var(--radius);padding:18px;}
+  .chip[aria-pressed="true"]{background:var(--navy);border-color:var(--navy);color:#fff;}
+  .form-box{background:var(--mist);border-radius:var(--radius);padding:20px;}
   .gift{
     background:var(--sand-soft);color:#6B5C41;font-size:13.5px;font-weight:600;
-    border-radius:10px;padding:13px 15px;margin-bottom:16px;text-align:center;line-height:1.55;
+    border-radius:10px;padding:13px 15px;margin-bottom:20px;text-align:center;line-height:1.55;
   }
+  .form-box input[type="text"],.form-box input[type="tel"]{
+    width:100%;padding:15px 16px;border:1px solid var(--line);background:#fff;
+    border-radius:11px;font-family:inherit;font-size:16px;color:var(--text);
+    margin-bottom:16px;letter-spacing:-0.02em;
+  }
+  .form-box input::placeholder{color:#A8B3C0;}
+  .form-box input.invalid{border-color:var(--err);}
+  .agree{display:flex;gap:10px;align-items:flex-start;font-size:13.5px;color:var(--text-mute);line-height:1.55;margin-bottom:10px;}
+  .agree input{width:19px;height:19px;margin-top:2px;flex:none;accent-color:var(--navy);}
+  .agree a{text-decoration:underline;color:var(--text-mute);}
+  .agree b{font-weight:700;color:var(--text);}
+  .agree-box{margin-bottom:20px;}
+  .msg{font-size:13.5px;color:var(--err);text-align:center;margin-top:12px;display:none;}
+  .terms{font-size:12px;color:#95A1AF;line-height:1.7;margin-top:14px;}
+  .done{display:none;text-align:center;padding:30px 10px;}
+  .done .ico{
+    width:56px;height:56px;border-radius:50%;background:var(--navy);color:#fff;
+    font-size:27px;line-height:56px;margin:0 auto 18px;
+  }
+  .done h3{font-size:20px;margin-bottom:10px;}
+  .done p{font-size:15px;line-height:1.7;}
 
   /* ── 최종 CTA ── */
   .final{background:var(--navy-deep);color:#fff;text-align:center;padding:56px 24px 44px;}
@@ -238,7 +259,6 @@ src="https://www.facebook.com/tr?id=2113774992702700&ev=PageView&noscript=1"
   /* ── 위치·푸터 ── */
   .loc{background:#fff;padding:44px 24px;}
   .loc h3{margin-bottom:14px;}
-  .loc img{border-radius:var(--radius);margin-bottom:18px;}
   .loc p{font-size:15px;line-height:1.8;}
   footer{background:var(--mist);padding:28px 24px 120px;font-size:12px;color:#8B98A7;line-height:1.8;}
 
@@ -252,15 +272,31 @@ src="https://www.facebook.com/tr?id=2113774992702700&ev=PageView&noscript=1"
   .sticky .price{color:#fff;font-size:14px;font-weight:700;line-height:1.35;flex:none;}
   .sticky .price small{display:block;color:#93A3B5;font-size:11.5px;font-weight:500;}
   .sticky .btn{padding:15px;font-size:15.5px;}
+
+  /* ── 약관 모달 ── */
+  .modal{
+    position:fixed;inset:0;z-index:90;display:none;
+    background:rgba(10,18,29,.55);padding:24px 20px;
+    align-items:center;justify-content:center;
+  }
+  .modal.open{display:flex;}
+  .modal-in{
+    background:#fff;border-radius:var(--radius);max-width:520px;width:100%;
+    max-height:76vh;overflow-y:auto;padding:26px 22px;
+  }
+  .modal-in h4{font-size:17px;font-weight:800;margin-bottom:14px;letter-spacing:-0.03em;}
+  .modal-in p{font-size:14px;line-height:1.8;margin-bottom:10px;}
+  .modal-in .close{
+    margin-top:18px;width:100%;padding:14px;border:none;border-radius:11px;
+    background:var(--navy);color:#fff;font-family:inherit;font-size:15.5px;font-weight:700;cursor:pointer;
+  }
 </style>
 </head>
 <body>
 <div class="wrap">
 
-  <!-- 1. 상단 프로모 -->
   <div class="promo">무제한 두피문신 <b>49만원</b> · 1년 무상 A/S 보장</div>
 
-  <!-- 1. 헤더 후크 -->
   <header class="hero">
     <span class="tag">DOTRAK·SMP 서울본점</span>
     <h1>감추는 데 쓰던 시간,<br />이번 한 번으로 끝내세요.</h1>
@@ -271,7 +307,6 @@ src="https://www.facebook.com/tr?id=2113774992702700&ev=PageView&noscript=1"
     </div>
   </header>
 
-  <!-- 2. 핵심 가치 USP -->
   <section class="usp">
     <p class="lead">실제 모근처럼 보이는 이유는, 점 하나를 찍는 깊이와 각도에 있습니다.</p>
     <p class="lead">1~1.5mm 정밀 제어와 다중 색소 블렌딩으로, 한눈에 시술한 티가 나지 않게 마무리합니다.</p>
@@ -281,13 +316,11 @@ src="https://www.facebook.com/tr?id=2113774992702700&ev=PageView&noscript=1"
     </figure>
   </section>
 
-  <!-- 3. 1차 CTA -->
   <div class="cta-first">
     <a class="btn btn-light" href="#form">1분 만에 내 견적 확인하기</a>
     <p class="btn-note">상담만 받으셔도 됩니다. 시술은 강요하지 않습니다.</p>
   </div>
 
-  <!-- 4. 신뢰 증거 -->
   <section class="trust">
     <h2>아무나 하는<br />두피문신이 아닙니다.</h2>
 
@@ -322,7 +355,6 @@ src="https://www.facebook.com/tr?id=2113774992702700&ev=PageView&noscript=1"
     </div>
   </section>
 
-  <!-- 5. 가격 · 혜택 -->
   <section class="pricing">
     <h2>49만원 캠페인,<br />이 3가지가 전부 포함입니다.</h2>
     <p class="sub">감추는 데 쓰던 비용·시간·에너지를 단 한 번으로 정리하세요.</p>
@@ -347,7 +379,6 @@ src="https://www.facebook.com/tr?id=2113774992702700&ev=PageView&noscript=1"
     </div>
   </section>
 
-  <!-- 6. 비포 · 애프터 -->
   <section class="ba">
     <h2>감추던 시간을<br />끝낸 분들.</h2>
     <p class="lead" style="margin-top:16px;">잘된 두피문신은 '전후'가 아니라 '원래 그랬던 사람'처럼 보입니다.</p>
@@ -367,13 +398,11 @@ src="https://www.facebook.com/tr?id=2113774992702700&ev=PageView&noscript=1"
     <p class="disclaim">※ 시술 결과와 만족도는 두피 상태에 따라 개인차가 있을 수 있습니다.</p>
   </section>
 
-  <!-- 중간 CTA -->
   <div class="cta-mid">
     <p>내 두피는 어느 정도일까?<br />1분이면 견적까지 나옵니다.</p>
     <a class="btn btn-gold" href="#form">무료로 진단받기</a>
   </div>
 
-  <!-- 7. 고객 후기 -->
   <section class="reviews">
     <h2>먼저 받아보신 분들의 이야기.</h2>
 
@@ -392,7 +421,6 @@ src="https://www.facebook.com/tr?id=2113774992702700&ev=PageView&noscript=1"
     <p class="disclaim">※ 개인에 따라 결과와 만족도는 다를 수 있습니다.</p>
   </section>
 
-  <!-- 8. FAQ -->
   <section class="faq">
     <h2>자주 묻는 질문.</h2>
 
@@ -418,34 +446,59 @@ src="https://www.facebook.com/tr?id=2113774992702700&ev=PageView&noscript=1"
     </details>
   </section>
 
-  <!-- 9. 긴급 · 희소성 -->
   <div class="urgent">
     <p>49만원 캠페인은 월 시술 가능 인원에 맞춰 조기 마감될 수 있습니다<br />— 이번 주 <span class="count">137명</span> 신청</p>
   </div>
 
-  <!-- 폼 -->
   <section class="form-sec" id="form">
     <h2>1분이면<br />가격·견적 받으실 수 있어요.</h2>
     <p class="sub">두피 상태를 진단하고 맞춤 시술 견적을 안내해드립니다.</p>
 
-    <span class="field-label">고민 부위 <span>*</span></span>
-    <div class="chips" id="chips">
-      <button type="button" class="chip" aria-pressed="false">M자·헤어라인</button>
-      <button type="button" class="chip" aria-pressed="false">정수리·상판</button>
-      <button type="button" class="chip" aria-pressed="false">가르마·여성</button>
-      <button type="button" class="chip" aria-pressed="false">잘 모르겠음</button>
+    <div id="formWrap">
+      <span class="field-label">고민 부위 <span>*</span></span>
+      <div class="chips" id="chips">
+        <button type="button" class="chip" aria-pressed="false">M자·헤어라인</button>
+        <button type="button" class="chip" aria-pressed="false">정수리·상판</button>
+        <button type="button" class="chip" aria-pressed="false">가르마·여성</button>
+        <button type="button" class="chip" aria-pressed="false">잘 모르겠음</button>
+      </div>
+
+      <div class="form-box">
+        <div class="gift">시술 시 1년 A/S 무료 + 모낭재생앰플 업그레이드 무료</div>
+
+        <label class="field-label" for="nm">이름 <span>*</span></label>
+        <input id="nm" type="text" autocomplete="name" placeholder="성함을 입력해주세요" />
+
+        <label class="field-label" for="ph">휴대폰 번호 <span>*</span></label>
+        <input id="ph" type="tel" inputmode="numeric" autocomplete="tel" placeholder="010-0000-0000" maxlength="13" />
+
+        <div class="agree-box">
+          <label class="agree">
+            <input id="agreeReq" type="checkbox" />
+            <span><b>[필수]</b> 개인정보 수집·이용 및 제3자 제공에 동의합니다.
+              <a href="#" data-modal="privacy">보기</a></span>
+          </label>
+          <label class="agree">
+            <input id="agreeMkt" type="checkbox" />
+            <span>[선택] 이벤트·혜택 안내 수신에 동의합니다.
+              <a href="#" data-modal="marketing">보기</a></span>
+          </label>
+        </div>
+
+        <button id="submitBtn" class="btn btn-gold" type="button">가격 알아보기</button>
+        <p class="msg" id="formMsg"></p>
+      </div>
+
+      <p class="btn-note" style="margin-top:14px;">신청 후 영업일 24시간 이내 1:1로 연락드립니다.</p>
     </div>
 
-    <div class="form-box">
-      <div class="gift">시술 시 1년 A/S 무료 + 모낭재생앰플 업그레이드 무료</div>
-      <div id="booster-form">
-        <script src="https://partners.booster.im/embed.js" data-code="sceuulys" async></script>
-      </div>
+    <div class="done" id="formDone">
+      <div class="ico">✓</div>
+      <h3>신청이 접수되었습니다.</h3>
+      <p>영업일 24시간 이내에 담당자가 1:1로 연락드립니다.<br />전화를 받기 어려우시면 문자로도 안내해드립니다.</p>
     </div>
-    <p class="btn-note" style="margin-top:14px;">신청 후 영업일 24시간 이내 1:1로 연락드립니다.</p>
   </section>
 
-  <!-- 10. 최종 CTA -->
   <div class="final">
     <h2>아직 망설이고 계신가요?</h2>
     <p>1분만 투자하시면 24시간 이내 맞춤 견적을 보내드립니다.<br />결정은 견적을 보신 다음에 하셔도 늦지 않습니다.</p>
@@ -453,7 +506,6 @@ src="https://www.facebook.com/tr?id=2113774992702700&ev=PageView&noscript=1"
     <p class="assure">시술은 절대 강요하지 않습니다 · 프라이빗 1인실<br />압구정역 2번출구 도보 5분</p>
   </div>
 
-  <!-- 위치 -->
   <section class="loc">
     <h3>도트락 오시는 길</h3>
     <p>서울 강남구 언주로172길 12, 라이프빌딩 4F<br />압구정역 2번출구 도보 5분 · 프라이빗 1인실</p>
@@ -466,7 +518,6 @@ src="https://www.facebook.com/tr?id=2113774992702700&ev=PageView&noscript=1"
   </footer>
 </div>
 
-<!-- 하단 고정 CTA -->
 <div class="sticky">
   <div class="sticky-inner">
     <div class="price">49만원<small>면적 무제한</small></div>
@@ -474,38 +525,142 @@ src="https://www.facebook.com/tr?id=2113774992702700&ev=PageView&noscript=1"
   </div>
 </div>
 
+<div class="modal" id="modal">
+  <div class="modal-in">
+    <div id="modalBody"></div>
+    <button class="close" type="button" id="modalClose">확인</button>
+  </div>
+</div>
+
 <script>
-  // 고민 부위 선택
-  (function(){
+  /* ── 고민 부위 선택 ── */
+  var selectedArea = '';
+  (function () {
     var chips = document.querySelectorAll('#chips .chip');
-    chips.forEach(function(c){
-      c.addEventListener('click', function(){
-        chips.forEach(function(x){ x.setAttribute('aria-pressed','false'); });
-        c.setAttribute('aria-pressed','true');
-        try { window.dotrakArea = c.textContent.trim(); } catch(e){}
+    chips.forEach(function (c) {
+      c.addEventListener('click', function () {
+        chips.forEach(function (x) { x.setAttribute('aria-pressed', 'false'); });
+        c.setAttribute('aria-pressed', 'true');
+        selectedArea = c.textContent.trim();
       });
     });
   })();
 
-  // 폼 제출 시 Lead 이벤트
-  (function(){
-    var fired = false;
-    function fireLead(){
-      if (fired) return;
-      fired = true;
-      if (typeof fbq === 'function') { fbq('track', 'Lead'); }
+  /* ── 전화번호 자동 하이픈 ── */
+  (function () {
+    var ph = document.getElementById('ph');
+    ph.addEventListener('input', function () {
+      var d = ph.value.replace(/\D/g, '').slice(0, 11);
+      if (d.length < 4) ph.value = d;
+      else if (d.length < 8) ph.value = d.slice(0, 3) + '-' + d.slice(3);
+      else ph.value = d.slice(0, 3) + '-' + d.slice(3, 7) + '-' + d.slice(7);
+    });
+  })();
+
+  /* ── 약관 모달 ── */
+  (function () {
+    var texts = {
+      privacy:
+        '<h4>개인정보 수집·이용 및 제3자 제공 동의</h4>' +
+        '<p><b>1. 수집 항목</b><br />이름, 휴대폰 번호, 고민 부위</p>' +
+        '<p><b>2. 수집·이용 목적</b><br />상담 예약 접수, 시술 견적 안내, 상담 관련 연락</p>' +
+        '<p><b>3. 보유 및 이용 기간</b><br />상담 종료 후 1년까지 보관하며, 이후 지체 없이 파기합니다.</p>' +
+        '<p><b>4. 제3자 제공</b><br />제공받는 자: 상담 접수 대행사<br />제공 항목: 이름, 휴대폰 번호, 고민 부위<br />이용 목적: 상담 연결 및 예약 안내<br />보유 기간: 상담 종료 후 1년</p>' +
+        '<p><b>5. 동의 거부 권리</b><br />동의를 거부하실 수 있으나, 이 경우 상담 신청이 제한됩니다.</p>',
+      marketing:
+        '<h4>마케팅 정보 수신 동의 (선택)</h4>' +
+        '<p><b>1. 수집 항목</b><br />휴대폰 번호</p>' +
+        '<p><b>2. 이용 목적</b><br />이벤트·프로모션·혜택 정보 안내 (문자, 알림톡)</p>' +
+        '<p><b>3. 보유 기간</b><br />동의 철회 시까지</p>' +
+        '<p>동의하지 않으셔도 상담 신청은 정상적으로 진행됩니다.</p>'
+    };
+    var modal = document.getElementById('modal');
+    var body = document.getElementById('modalBody');
+    document.querySelectorAll('[data-modal]').forEach(function (a) {
+      a.addEventListener('click', function (e) {
+        e.preventDefault();
+        body.innerHTML = texts[a.getAttribute('data-modal')];
+        modal.classList.add('open');
+      });
+    });
+    function close() { modal.classList.remove('open'); }
+    document.getElementById('modalClose').addEventListener('click', close);
+    modal.addEventListener('click', function (e) { if (e.target === modal) close(); });
+    document.addEventListener('keydown', function (e) { if (e.key === 'Escape') close(); });
+  })();
+
+  /* ── 폼 제출 ── */
+  (function () {
+    var btn = document.getElementById('submitBtn');
+    var msg = document.getElementById('formMsg');
+    var nm = document.getElementById('nm');
+    var ph = document.getElementById('ph');
+    var sending = false;
+
+    function getCookie(n) {
+      var m = document.cookie.match('(^|;)\\s*' + n + '\\s*=\\s*([^;]+)');
+      return m ? m.pop() : '';
     }
-    document.addEventListener('submit', function(e){
-      if (e.target && e.target.closest('#booster-form')) fireLead();
-    }, true);
-    document.addEventListener('click', function(e){
-      var t = e.target.closest('#booster-form button, #booster-form input[type="submit"], #booster-form [type="submit"]');
-      if (t) fireLead();
-    }, true);
-    window.addEventListener('message', function(e){
-      var d = e.data;
-      var s = typeof d === 'string' ? d : (d && (d.type || d.event) || '');
-      if (typeof s === 'string' && /submit|complete|success|lead/i.test(s)) fireLead();
+    function show(t, el) {
+      msg.textContent = t;
+      msg.style.display = 'block';
+      document.querySelectorAll('.form-box input.invalid').forEach(function (i) { i.classList.remove('invalid'); });
+      if (el) { el.classList.add('invalid'); el.focus(); }
+    }
+    function uid() {
+      if (window.crypto && crypto.randomUUID) return crypto.randomUUID();
+      return Date.now().toString(36) + Math.random().toString(36).slice(2, 10);
+    }
+
+    btn.addEventListener('click', async function () {
+      if (sending) return;
+
+      var name = nm.value.trim();
+      var phone = ph.value.trim();
+      var digits = phone.replace(/\D/g, '');
+
+      if (!selectedArea) return show('고민 부위를 선택해주세요.');
+      if (name.length < 2) return show('성함을 정확히 입력해주세요.', nm);
+      if (digits.length < 10 || !/^01/.test(digits)) return show('휴대폰 번호를 정확히 입력해주세요.', ph);
+      if (!document.getElementById('agreeReq').checked) return show('개인정보 수집·이용 및 제3자 제공 동의가 필요합니다.');
+
+      msg.style.display = 'none';
+      sending = true;
+      btn.disabled = true;
+      btn.textContent = '신청 중…';
+
+      var eventId = uid();
+
+      if (typeof fbq === 'function') {
+        fbq('track', 'Lead', { content_name: selectedArea }, { eventID: eventId });
+      }
+
+      try {
+        var r = await fetch('/api/lead', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({
+            name: name,
+            phone: phone,
+            area: selectedArea,
+            agreeMarketing: document.getElementById('agreeMkt').checked,
+            eventId: eventId,
+            fbp: getCookie('_fbp'),
+            fbc: getCookie('_fbc'),
+            sourceUrl: location.href
+          })
+        });
+        if (!r.ok) throw new Error('bad response');
+
+        document.getElementById('formWrap').style.display = 'none';
+        document.getElementById('formDone').style.display = 'block';
+        document.getElementById('form').scrollIntoView({ behavior: 'smooth', block: 'start' });
+      } catch (e) {
+        sending = false;
+        btn.disabled = false;
+        btn.textContent = '가격 알아보기';
+        show('일시적인 오류입니다. 잠시 후 다시 시도해주세요.');
+      }
     });
   })();
 </script>
